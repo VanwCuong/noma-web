@@ -1,0 +1,720 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="description" content="Noma — Ứng dụng quản lý thời gian tối giản dành cho học sinh, sinh viên và giáo viên." />
+    <meta name="theme-color" content="#f5f0e8" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@1,500;1,600&display=swap&subset=vietnamese" rel="stylesheet" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Noma — Quản lý thời gian tối giản</title>
+  </head>
+  <body>
+    <header class="site-header wrap">
+      <a href="#" class="wordmark"><span></span>Noma</a>
+      <nav aria-label="Điều hướng chính">
+        <a href="#doi-tuong">Đối tượng</a>
+        <a href="#tinh-nang">Tính năng</a>
+        <a href="#demo">Bản dùng thử</a>
+        <a href="#nang-cap">Premium</a>
+        <a href="#cau-hoi">Câu hỏi</a>
+      </nav>
+      <div class="header-actions">
+        <button class="btn btn--icon" id="theme-toggle-btn" aria-label="Chuyển chế độ sáng tối" title="Sáng / Tối"><span>◐</span></button>
+        <a href="#waitlist" class="btn btn--primary"><span>Nhận thông báo</span></a>
+        <button class="mobile-menu-btn" aria-label="Mở menu" onclick="toggleMobileMenu()">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
+        </button>
+      </div>
+    </header>
+
+    <div class="drawer-backdrop" id="drawer-backdrop" onclick="toggleMobileMenu()"></div>
+    <div class="mobile-drawer" id="mobile-drawer">
+      <div style="display: flex; justify-content: space-between; align-items: center;">
+        <span class="wordmark"><span></span>Noma</span>
+        <button onclick="toggleMobileMenu()" style="background:var(--n-soft); border:none; width:32px; height:32px; border-radius:50%; font-size: 1rem; cursor:pointer; display:flex; align-items:center; justify-content:center;">✕</button>
+      </div>
+      <nav style="display: flex; flex-direction: column; gap: 14px; margin-top: 12px;">
+        <a href="#doi-tuong" onclick="toggleMobileMenu()">Đối tượng</a>
+        <a href="#tinh-nang" onclick="toggleMobileMenu()">Tính năng</a>
+        <a href="#demo" onclick="toggleMobileMenu()">Bản dùng thử</a>
+        <a href="#nang-cap" onclick="toggleMobileMenu()">Biểu phí</a>
+        <a href="#cau-hoi" onclick="toggleMobileMenu()">Câu hỏi</a>
+      </nav>
+    </div>
+
+    <main class="wrap">
+      <!-- Hero Section -->
+      <section class="hero scroll-reveal">
+        <h1><span class="hero-outline">Quản lý thời gian tối ưu.</span><br /><em>Không còn áp lực deadline.</em></h1>
+        <p class="hero-intro">Noma giúp học sinh, sinh viên và giáo viên giới hạn đúng 3 việc quan trọng nhất mỗi ngày. Tập trung sâu, theo dõi tiến độ trực quan và tận hưởng trọn vẹn thời gian cá nhân.</p>
+        <div class="hero-actions">
+          <a href="#demo" class="btn btn--primary"><span>Trải nghiệm Sandbox</span></a>
+          <a href="#waitlist" class="btn"><span>Nhận thông báo ra mắt</span></a>
+        </div>
+        <p style="font-size: 0.75rem; color: var(--n-muted); margin-top: 12px;">Miễn phí gói cơ bản. Không cần thẻ tín dụng.</p>
+        <div class="hero-visual" aria-label="Không gian làm việc ấm áp cùng Noma">
+          <img src="https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&amp;fit=crop&amp;w=1800&amp;q=85" alt="Không gian làm việc ngập nắng, tông màu ấm" />
+          <div class="hero-visual-caption">
+            <span>Ít hơn, nhưng tốt hơn.</span>
+            <strong>Một ngày<br />đáng sống.</strong>
+          </div>
+          <div class="orbit-badge" aria-label="Sống chậm, làm việc sâu">
+            <svg viewBox="0 0 120 120" role="img" aria-hidden="true">
+              <defs>
+                <path id="orbit-path" d="M 60,60 m -43,0 a 43,43 0 1,1 86,0 a 43,43 0 1,1 -86,0" />
+              </defs>
+              <text><textPath href="#orbit-path">SỐNG CHẬM · LÀM VIỆC SÂU · NOMA · </textPath></text>
+            </svg>
+            <span>✳</span>
+          </div>
+        </div>
+
+        <!-- Sandbox Frame Giả Lập macOS -->
+        <div class="product-frame" id="demo">
+          <!-- macOS Window Title Bar -->
+          <div class="mac-window-bar">
+            <div class="mac-dots">
+              <span class="mac-dot mac-dot--close"></span>
+              <span class="mac-dot mac-dot--minimize"></span>
+              <span class="mac-dot mac-dot--maximize"></span>
+            </div>
+            <div class="mac-title">Noma.app</div>
+            <div style="text-align: right; font-size: 0.75rem; color: var(--n-muted);">⊞</div>
+          </div>
+          
+          <div class="app-shell">
+            <!-- Sidebar -->
+            <aside class="app-sidebar">
+              <span>ĐIỀU HƯỚNG</span>
+              <button class="is-active" data-tab="today">Hôm nay</button>
+              <button data-tab="focus">Tập trung</button>
+              <button data-tab="notes">Ghi chú</button>
+              <button data-tab="weekly">Báo cáo tuần</button>
+            </aside>
+            
+            <!-- Main Area -->
+            <div class="app-main">
+              <!-- Control Bar -->
+              <div class="demo-control-bar">
+                <div class="ios-date-widget">
+                  <div class="ios-date-day" id="ios-date-day">19</div>
+                  <div class="ios-date-info">
+                    <div id="ios-date-weekday" style="color: var(--n-green); font-weight:700;">THỨ HAI</div>
+                    <div id="ios-date-month" style="color: var(--n-muted);">Tháng 10, 2026</div>
+                  </div>
+                </div>
+
+                <div style="display: flex; align-items: center; gap: 8px;">
+                  <span style="font-size: 0.72rem; font-weight: 600; color: var(--n-muted);">Mẫu:</span>
+                  <div class="segmented-control">
+                    <button class="segmented-btn is-active" data-role="student" onclick="switchRole('student')">Học sinh</button>
+                    <button class="segmented-btn" data-role="uni" onclick="switchRole('uni')">Sinh viên</button>
+                    <button class="segmented-btn" data-role="teacher" onclick="switchRole('teacher')">Giáo viên</button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Tab 1: Hôm nay -->
+              <div class="demo-view" id="view-today">
+                <div class="dashboard-grid">
+                  <div>
+                    <h3 style="margin:0 0 4px; font-size: 1.05rem;" id="motto-title">Danh sách công việc hôm nay</h3>
+                    <p style="font-size: 0.8rem; color: var(--n-muted); margin:0 0 14px;">Giới hạn 3 ưu tiên cốt lõi để giữ sự tập trung tuyệt đối.</p>
+                    
+                    <div id="task-list" style="display: grid; gap: 8px; margin-bottom: 14px;"></div>
+                    
+                    <div style="display: flex; gap: 8px;">
+                      <input type="text" id="new-task-input" placeholder="Thêm việc cần làm tiếp theo..." style="flex: 1; padding: 10px 14px; border: 1px solid var(--n-line-strong); border-radius: 980px; background: var(--n-white); color: var(--n-ink); outline: none; font-size: 0.85rem;" />
+                      <button class="btn btn--primary" id="add-task-btn" style="height: 40px;"><span>Thêm</span></button>
+                    </div>
+                  </div>
+
+                  <!-- Circle Progress -->
+                  <div class="progress-card">
+                    <svg class="circular-chart" viewBox="0 0 36 36">
+                      <path class="bg" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+                      <path class="meter" id="progress-circle" stroke-dasharray="100, 100" stroke-dashoffset="100" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+                      <text x="18" y="20.35" class="chart-text" id="progress-text">0%</text>
+                    </svg>
+                    <span style="font-size: 0.7rem; font-weight: 700; color: var(--n-green); margin-top: 6px;">HOÀN THÀNH</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Tab 2: Tập trung -->
+              <div class="demo-view" id="view-focus" style="display: none; text-align: center; padding: 10px 0;">
+                <h3 id="focus-task-title" style="font-size: 1.05rem; margin-bottom: 4px;">Đang tập trung: Ôn chương 3 Hóa học</h3>
+                <p style="font-size: 0.8rem; color: var(--n-muted); margin-bottom: 12px;">Đồng hồ đếm ngược Pomodoro giúp tối ưu hóa hiệu suất.</p>
+                
+                <div id="clock-display" style="font-size: 3.8rem; font-family: var(--f-mono); margin: 12px 0; font-weight: 700; color: var(--n-green); letter-spacing: -0.02em;">25:00</div>
+                
+                <div style="display: flex; justify-content: center; gap: 8px; margin-bottom: 16px;">
+                  <button class="btn" onclick="setTimerDuration(25)"><span>25 phút</span></button>
+                  <button class="btn" onclick="setTimerDuration(45)"><span>45 phút</span></button>
+                  <button class="btn" onclick="setTimerDuration(60)"><span>60 phút</span></button>
+                </div>
+                
+                <div style="display: flex; justify-content: center; gap: 10px;">
+                  <button class="btn btn--primary" id="start-timer-btn" style="padding: 0 32px; height: 42px; font-size: 0.9rem;"><span>Bắt đầu ngay</span></button>
+                  <button class="btn" id="reset-timer-btn" style="height: 42px;"><span>Đặt lại</span></button>
+                </div>
+              </div>
+
+              <!-- Tab 3: Ghi chú -->
+              <div class="demo-view" id="view-notes" style="display: none;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                  <h3 style="margin: 0; font-size: 1.05rem;">Ghi chú nhanh</h3>
+                  <span style="font-size: 0.72rem; font-family: var(--f-mono); color: var(--n-muted);" id="note-word-count">0 từ | 0 ký tự</span>
+                </div>
+                
+                <textarea id="note-text" rows="5" style="width: 100%; padding: 14px; border: 1px solid var(--n-line-strong); border-radius: 14px; background: var(--n-white); color: var(--n-ink); resize: vertical; outline: none; font-size: 0.88rem; line-height: 1.5;" placeholder="Ghi lại công thức, ý tưởng bài viết hoặc nhắc nhở quan trọng..."></textarea>
+                
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 6px;">
+                  <p id="note-status" style="font-size: 0.75rem; color: var(--n-green); margin: 0; font-weight: 600;"></p>
+                  <button class="btn" onclick="clearNote()" style="height: 30px; font-size: 0.72rem; padding: 0 14px;"><span>Xóa nội dung</span></button>
+                </div>
+              </div>
+
+              <!-- Tab 4: Báo cáo tuần -->
+              <div class="demo-view" id="view-weekly" style="display: none;">
+                <h3 style="font-size: 1.05rem; margin-bottom: 4px;">Báo cáo tiến độ tuần</h3>
+                <p style="font-size: 0.8rem; color: var(--n-muted); margin-bottom: 16px;">Thống kê công việc đã hoàn thành và giờ tập trung.</p>
+                
+                <div style="display: flex; align-items: flex-end; gap: 14px; height: 120px; padding: 0 10px 8px; border-bottom: 1px solid var(--n-line-strong);">
+                  <div style="flex: 1; display: flex; flex-direction: column; align-items: center; gap: 6px; height: 100%; justify-content: flex-end;">
+                    <span style="font-size:0.65rem; font-family:var(--f-mono); color:var(--n-muted);">2h</span>
+                    <div style="width: 100%; background: var(--n-green-soft); height: 40%; border-radius: 6px;"></div>
+                    <span style="font-size: 0.7rem; font-family: var(--f-mono); font-weight: 600;">T2</span>
+                  </div>
+                  <div style="flex: 1; display: flex; flex-direction: column; align-items: center; gap: 6px; height: 100%; justify-content: flex-end;">
+                    <span style="font-size:0.65rem; font-family:var(--f-mono); color:var(--n-muted);">3.5h</span>
+                    <div style="width: 100%; background: var(--n-green-soft); height: 70%; border-radius: 6px;"></div>
+                    <span style="font-size: 0.7rem; font-family: var(--f-mono); font-weight: 600;">T3</span>
+                  </div>
+                  <div style="flex: 1; display: flex; flex-direction: column; align-items: center; gap: 6px; height: 100%; justify-content: flex-end;">
+                    <span style="font-size:0.65rem; font-family:var(--f-mono); color:var(--n-green); font-weight:700;">4.5h</span>
+                    <div style="width: 100%; background: var(--n-green); height: 90%; border-radius: 6px; box-shadow: 0 4px 10px var(--n-green-soft);"></div>
+                    <span style="font-size: 0.7rem; font-family: var(--f-mono); font-weight: 700; color:var(--n-green);">T4</span>
+                  </div>
+                  <div style="flex: 1; display: flex; flex-direction: column; align-items: center; gap: 6px; height: 100%; justify-content: flex-end;">
+                    <span style="font-size:0.65rem; font-family:var(--f-mono); color:var(--n-muted);">2.5h</span>
+                    <div style="width: 100%; background: var(--n-green-soft); height: 50%; border-radius: 6px;"></div>
+                    <span style="font-size: 0.7rem; font-family: var(--f-mono); font-weight: 600;">T5</span>
+                  </div>
+                  <div style="flex: 1; display: flex; flex-direction: column; align-items: center; gap: 6px; height: 100%; justify-content: flex-end;">
+                    <span style="font-size:0.65rem; font-family:var(--f-mono); color:var(--n-muted);">3h</span>
+                    <div style="width: 100%; background: var(--n-green-soft); height: 60%; border-radius: 6px;"></div>
+                    <span style="font-size: 0.7rem; font-family: var(--f-mono); font-weight: 600;">T6</span>
+                  </div>
+                </div>
+
+                <div style="display: flex; justify-content: space-between; margin-top: 12px; font-size: 0.78rem; color: var(--n-muted);">
+                  <span>Tổng tuần: <strong style="color:var(--n-ink);">15/15 công việc</strong></span>
+                  <span>Hiệu suất: <strong style="color:var(--n-green);">94%</strong></span>
+                </div>
+              </div>
+
+              <!-- Custom Title -->
+              <div style="border-top: 1px solid var(--n-line-strong); padding-top: 10px; display: flex; gap: 8px; align-items: center;">
+                <input type="text" id="custom-motto-input" placeholder="Tùy chỉnh mục tiêu cá nhân..." style="flex: 1; padding: 8px 14px; font-size: 0.8rem; border: 1px solid var(--n-line-strong); border-radius: 980px; background: var(--n-white); color: var(--n-ink); outline: none;" />
+                <button class="btn" onclick="updateMotto()" style="height: 34px; font-size: 0.75rem;"><span>Cập nhật</span></button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Đối tượng -->
+      <section id="doi-tuong" class="scroll-reveal">
+        <div class="section-header">
+          <span>mục tiêu</span>
+          <h2>Giải pháp thực tế cho việc<br /><em>học tập và giảng dạy.</em></h2>
+        </div>
+        <div class="grid-3">
+          <div class="card">
+            <h3>Học sinh & Sinh viên</h3>
+            <p>Quản lý bài tập, đồ án và lịch thi cử gọn gàng theo từng ngày, xóa bỏ hoàn toàn áp lực dồn ứ deadline.</p>
+          </div>
+          <div class="card">
+            <h3>Giáo viên</h3>
+            <p>Tổ chức lịch soạn giáo án, chấm bài kiểm tra và theo dõi tiến độ công việc trong một giao diện tối giản duy nhất.</p>
+          </div>
+          <div class="card">
+            <h3>Người bận rộn</h3>
+            <p>Xóa bỏ thói quen trì hoãn bằng cách chia nhỏ công việc và tập trung giải quyết từng phiên ngắn hạn.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Tính năng -->
+      <section id="tinh-nang" class="scroll-reveal">
+        <div class="section-header">
+          <span>Tính năng cốt lõi</span>
+          <h2>Đơn giản, tập trung<br /><em>và hiệu quả.</em></h2>
+        </div>
+        <div class="grid-3">
+          <div class="card">
+            <h3>Quy tắc 3 việc cốt lõi</h3>
+            <p>Loại bỏ danh sách việc cần làm quá tải. Giúp bạn xác định đúng 3 việc quan trọng nhất để hoàn thành trọn vẹn mỗi ngày.</p>
+          </div>
+          <div class="card">
+            <h3>Đồng hồ tập trung Pomodoro</h3>
+            <p>Tích hợp bộ đếm giờ tiêu chuẩn giúp duy trì sự chú ý cao độ và sắp xếp khoảng nghỉ khoa học.</p>
+          </div>
+          <div class="card">
+            <h3>Lưu trữ riêng tư tuyệt đối</h3>
+            <p>Mọi thông tin cá nhân và kế hoạch học tập được lưu trực tiếp trên thiết bị của bạn, bảo mật hoàn toàn.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Biểu phí -->
+      <section id="nang-cap" class="scroll-reveal">
+        <div class="section-header">
+          <span>Biểu phí minh bạch</span>
+          <h2>Thanh toán một lần.<br /><em>Sử dụng lâu dài.</em></h2>
+        </div>
+        
+        <div class="pricing-grid">
+          <div class="pricing-card">
+            <h3>Cơ bản</h3>
+            <div class="price">0₫</div>
+            <p style="font-size: 0.82rem; color: var(--n-muted);">Miễn phí vĩnh viễn</p>
+            <ul class="pricing-features">
+              <li>✓ Danh sách 3 việc mỗi ngày</li>
+              <li>✓ Đồng hồ tập trung tiêu chuẩn</li>
+              <li>✓ Ghi chú nhanh cá nhân</li>
+              <li>✓ Lưu trữ an toàn trên thiết bị</li>
+            </ul>
+            <a href="#waitlist" class="btn" style="margin-top: 16px;" onclick="selectPlan('Cơ bản')"><span>Bắt đầu ngay</span></a>
+          </div>
+
+          <div class="pricing-card featured">
+            <h3>Plus</h3>
+            <div class="price">149.000₫</div>
+            <p style="font-size: 0.82rem; color: var(--n-muted);">Thanh toán một lần duy nhất</p>
+            <ul class="pricing-features">
+              <li>✓ Mọi tính năng gói Cơ bản</li>
+              <li>✓ Tùy chỉnh linh hoạt thời lượng Pomodoro</li>
+              <li>✓ Xem biểu đồ tiến độ & lịch sử các tuần</li>
+              <li>✓ Mở khóa toàn bộ theme giao diện</li>
+            </ul>
+            <a href="#waitlist" class="btn btn--primary" style="margin-top: 16px;" onclick="selectPlan('Plus')"><span>Chọn gói Plus</span></a>
+          </div>
+
+          <div class="pricing-card">
+            <h3>Giáo viên</h3>
+            <div class="price">249.000₫</div>
+            <p style="font-size: 0.82rem; color: var(--n-muted);">Thanh toán một lần duy nhất</p>
+            <ul class="pricing-features">
+              <li>✓ Mọi tính năng gói Plus</li>
+              <li>✓ Quản lý lịch trình theo lớp học</li>
+              <li>✓ Mẫu kế hoạch soạn bài chuẩn</li>
+              <li>✓ Cập nhật tính năng mới trọn đời</li>
+            </ul>
+            <a href="#waitlist" class="btn" style="margin-top: 16px;" onclick="selectPlan('Giáo viên')"><span>Chọn gói Giáo viên</span></a>
+          </div>
+        </div>
+      </section>
+
+      <!-- FAQ -->
+      <section id="cau-hoi" class="scroll-reveal">
+        <div class="section-header" style="text-align: center; max-width: 600px; margin-inline: auto;">
+          <span>Hỗ trợ</span>
+          <h2>Câu hỏi thường gặp</h2>
+        </div>
+        <div class="faq-list">
+          <details>
+            <summary>Noma giúp tôi cải thiện hiệu suất như thế nào? <span>+</span></summary>
+            <p>Noma áp dụng nguyên lý ưu tiên tối giản: loại bỏ sự ôm đồm bằng cách buộc bạn chọn ra 3 việc quan trọng nhất. Kết hợp với đồng hồ đếm giờ, bạn sẽ không còn lo bị phân tán tư tưởng.</p>
+          </details>
+          <details>
+            <summary>Dữ liệu của tôi được bảo mật ra sao? <span>+</span></summary>
+            <p>Toàn bộ dữ liệu công việc và ghi chú được lưu trữ hoàn toàn trên trình duyệt thiết bị cá nhân của bạn (localStorage), không gửi về bất kỳ máy chủ trung gian nào.</p>
+          </details>
+          <details>
+            <summary>Ứng dụng có thu phí duy trì hàng tháng không? <span>+</span></summary>
+            <p>Không. Noma hoạt động theo mô hình trả phí một lần duy nhất cho các gói nâng cấp, bạn sở hữu vĩnh viễn không phí ẩn.</p>
+          </details>
+          <details>
+            <summary>Liên hệ hỗ trợ kỹ thuật hoặc góp ý ở đâu? <span>+</span></summary>
+            <p>Bạn có thể liên hệ trực tiếp với nhà phát triển qua email cuongcongchua97@gmail.com hoặc SĐT 0589 595 169.</p>
+          </details>
+        </div>
+      </section>
+
+      <!-- Waitlist -->
+      <section id="waitlist" class="scroll-reveal" style="text-align: center; border-bottom: none; max-width: 500px; margin-inline: auto;">
+        <h2>Sẵn sàng trải nghiệm <em>Noma?</em></h2>
+        <p style="color: var(--n-muted); margin: 12px 0 24px; font-size: 0.95rem;">Để lại email để nhận thông báo ngay khi ứng dụng ra mắt chính thức.</p>
+        
+        <form name="waitlist" method="POST" data-netlify="true" netlify-honeypot="bot-field" style="display: grid; gap: 10px;" onsubmit="handleNetlifySubmit(event)">
+          <input type="hidden" name="form-name" value="waitlist" />
+          <input type="hidden" name="selected-plan" id="selected-plan-input" value="Cơ bản" />
+          <p style="display: none;"><label>Don't fill this out if you're human: <input name="bot-field" /></label></p>
+          
+          <input type="email" name="email" placeholder="Địa chỉ email của bạn..." required style="padding: 12px 16px; border: 1px solid var(--n-line-strong); border-radius: 980px; background: var(--n-white); color: var(--n-ink); outline: none; font-size: 0.9rem;" />
+          <select name="role" style="padding: 12px 16px; border: 1px solid var(--n-line-strong); border-radius: 980px; background: var(--n-white); color: var(--n-ink); outline: none; font-size: 0.9rem; text-align-last: center;">
+            <option value="Học sinh">Học sinh</option>
+            <option value="Sinh viên">Sinh viên</option>
+            <option value="Giáo viên">Giáo viên</option>
+            <option value="Khác">Khác</option>
+          </select>
+          <button type="submit" class="btn btn--primary" style="height: 42px; font-size: 0.85rem;"><span>Đăng ký ngay</span></button>
+          <p id="form-feedback" style="font-size: 0.8rem; color: var(--n-green); min-height: 1.2em; margin: 0; font-weight: 600;" aria-live="polite"></p>
+        </form>
+      </section>
+    </main>
+
+    <footer class="wrap">
+      <div>
+        <p>© 2026 Nguyễn Văn Cường. Bảo lưu mọi quyền.</p>
+        <p style="font-size: 0.75rem; margin-top: 2px; color: var(--n-muted);">Liên hệ: </p>
+      </div>
+      
+      <div>
+        <a href="#" onclick="openLegal('privacy')">Quyền riêng tư</a> · <a href="#" onclick="openLegal('terms')">Điều khoản</a>
+      </div>
+    </footer>
+
+    <div class="legal-modal" id="legal-modal">
+      <div class="legal-content">
+        <button class="legal-close" onclick="closeLegal()">✕</button>
+        <div id="legal-body"></div>
+      </div>
+    </div>
+
+    <div class="toast" id="toast-msg">Đã cập nhật!</div>
+
+    <script>
+      const now = new Date();
+      const weekdays = ['CHỦ NHẬT', 'THỨ HAI', 'THỨ BA', 'THỨ TƯ', 'THỨ NĂM', 'THỨ SÁU', 'THỨ BẢY'];
+      const dayEl = document.getElementById('ios-date-day');
+      const weekdayEl = document.getElementById('ios-date-weekday');
+      const monthEl = document.getElementById('ios-date-month');
+      if(dayEl) dayEl.textContent = now.getDate();
+      if(weekdayEl) weekdayEl.textContent = weekdays[now.getDay()];
+      if(monthEl) monthEl.textContent = `Tháng ${now.getMonth() + 1}, ${now.getFullYear()}`;
+
+      const observerOptions = { root: null, rootMargin: '0px 0px -50px 0px', threshold: 0.15 };
+      const scrollObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+          } else {
+            if (window.scrollY < entry.boundingClientRect.top + window.scrollY) {
+              entry.target.classList.remove('is-visible');
+            }
+          }
+        });
+      }, observerOptions);
+
+      document.querySelectorAll('.scroll-reveal').forEach(el => scrollObserver.observe(el));
+
+      const toggleBtn = document.getElementById('theme-toggle-btn');
+      if(toggleBtn) {
+        toggleBtn.addEventListener('click', () => {
+          const currentTheme = document.documentElement.getAttribute('data-theme');
+          const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+          document.documentElement.setAttribute('data-theme', newTheme);
+          showToast("Đã chuyển giao diện");
+        });
+      }
+
+      function toggleMobileMenu() {
+        const drawer = document.getElementById('mobile-drawer');
+        const backdrop = document.getElementById('drawer-backdrop');
+        if(drawer) drawer.classList.toggle('open');
+        if(backdrop) backdrop.classList.toggle('open');
+      }
+
+      const tabs = document.querySelectorAll('.app-sidebar button[data-tab]');
+      const views = document.querySelectorAll('.app-main .demo-view');
+      tabs.forEach(btn => {
+        btn.addEventListener('click', () => {
+          tabs.forEach(b => b.classList.remove('is-active'));
+          views.forEach(v => { v.style.display = 'none'; });
+          btn.classList.add('is-active');
+          const targetView = document.getElementById('view-' + btn.getAttribute('data-tab'));
+          if(targetView) targetView.style.display = 'block';
+        });
+      });
+
+      const sampleData = {
+        student: [
+          { text: "Ôn chương 3 Hóa học", done: true },
+          { text: "Làm bài tập Toán giải tích", done: false },
+          { text: "Nộp bài văn nghị luận", done: false }
+        ],
+        uni: [
+          { text: "Đọc tài liệu Kinh tế vi mô", done: true },
+          { text: "Hoàn thành slide thuyết trình", done: true },
+          { text: "Nộp báo cáo thực tập", done: false }
+        ],
+        teacher: [
+          { text: "Chấm bài kiểm tra lớp 11A1", done: false },
+          { text: "Soạn giáo án tuần mới", done: true },
+          { text: "Nhập điểm hệ thống", done: true }
+        ]
+      };
+
+      let currentRole = 'student';
+      let tasks = [...sampleData.student];
+      let displayedPercentage = 0;
+      let progressAnimationFrame = null;
+
+      function renderTasks() {
+        const list = document.getElementById('task-list');
+        if(!list) return;
+        list.innerHTML = '';
+        tasks.forEach((task, index) => {
+          const item = document.createElement('div');
+          item.style.cssText = "display: flex; align-items: center; justify-content: space-between; padding: 8px 12px; background: var(--n-soft); border-radius: 980px; font-size: 0.85rem; transition: all 0.2s ease;";
+          item.innerHTML = `
+            <label style="display: flex; align-items: center; gap: 10px; cursor: pointer; flex: 1; padding-left: 6px;">
+              <input type="checkbox" ${task.done ? 'checked' : ''} onchange="toggleTask(${index})" style="width: 15px; height: 15px; accent-color: var(--n-green);" />
+              <span style="${task.done ? 'text-decoration: line-through; color: var(--n-muted);' : 'font-weight: 600;'}">${task.text}</span>
+            </label>
+            <button onclick="removeTask(${index})" style="background: none; border: none; color: var(--n-muted); cursor: pointer; font-size: 0.75rem; padding: 4px 8px;">✕</button>
+          `;
+          list.appendChild(item);
+        });
+        updateProgressChart();
+      }
+
+      function updateProgressChart() {
+        const total = tasks.length;
+        const completed = tasks.filter(t => t.done).length;
+        const percentage = total === 0 ? 0 : Math.round((completed / total) * 100);
+        
+        const circle = document.getElementById('progress-circle');
+        const text = document.getElementById('progress-text');
+        
+        if(circle && text) {
+          circle.style.strokeDashoffset = `${100 - percentage}`;
+          if(progressAnimationFrame !== null) {
+            cancelAnimationFrame(progressAnimationFrame);
+          }
+
+          const startPercentage = displayedPercentage;
+          const difference = percentage - startPercentage;
+          const duration = 1500;
+          let startTime = null;
+
+          function animatePercentage(timestamp) {
+            if(startTime === null) startTime = timestamp;
+            const progress = Math.min((timestamp - startTime) / duration, 1);
+            const easedProgress = 1 - Math.pow(1 - progress, 3);
+            displayedPercentage = Math.round(startPercentage + difference * easedProgress);
+            text.textContent = `${displayedPercentage}%`;
+
+            if(progress < 1) {
+              progressAnimationFrame = requestAnimationFrame(animatePercentage);
+            } else {
+              displayedPercentage = percentage;
+              progressAnimationFrame = null;
+            }
+          }
+
+          if(window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+            displayedPercentage = percentage;
+            text.textContent = `${percentage}%`;
+            progressAnimationFrame = null;
+          } else {
+            progressAnimationFrame = requestAnimationFrame(animatePercentage);
+          }
+        }
+      }
+
+      function toggleTask(index) { tasks[index].done = !tasks[index].done; renderTasks(); }
+      function removeTask(index) { tasks.splice(index, 1); renderTasks(); }
+
+      const addTaskBtn = document.getElementById('add-task-btn');
+      if(addTaskBtn) {
+        addTaskBtn.addEventListener('click', () => {
+          const input = document.getElementById('new-task-input');
+          if(!input) return;
+          const val = input.value.trim();
+          if(!val) return;
+          if(tasks.filter(t => !t.done).length >= 3) {
+            showToast("Chỉ chọn tối đa 3 việc ưu tiên!");
+            return;
+          }
+          tasks.push({ text: val, done: false });
+          input.value = '';
+          renderTasks();
+        });
+      }
+
+      function switchRole(role) {
+        document.querySelectorAll('.segmented-btn').forEach(b => b.classList.remove('is-active'));
+        const activeBtn = document.querySelector(`[data-role="${role}"]`);
+        if(activeBtn) activeBtn.classList.add('is-active');
+        currentRole = role;
+        tasks = [...sampleData[role]];
+        renderTasks();
+        const focusTitle = document.getElementById('focus-task-title');
+        if(focusTitle) focusTitle.textContent = "Đang tập trung: " + tasks[0].text;
+      }
+
+      renderTasks();
+
+      let timerInterval = null;
+      let timeLeft = 25 * 60;
+      function setTimerDuration(mins) {
+        clearInterval(timerInterval);
+        timerInterval = null;
+        const startBtn = document.getElementById('start-timer-btn');
+        if(startBtn) startBtn.innerHTML = "<span>Bắt đầu ngay</span>";
+        timeLeft = mins * 60;
+        updateClockDisplay();
+      }
+      function updateClockDisplay() {
+        const m = Math.floor(timeLeft / 60).toString().padStart(2, '0');
+        const s = (timeLeft % 60).toString().padStart(2, '0');
+        const clock = document.getElementById('clock-display');
+        if(clock) clock.textContent = `${m}:${s}`;
+        document.title = `${m}:${s} — Noma Focus`;
+      }
+      
+      const startTimerBtn = document.getElementById('start-timer-btn');
+      if(startTimerBtn) {
+        startTimerBtn.addEventListener('click', (e) => {
+          if(timerInterval) {
+            clearInterval(timerInterval);
+            timerInterval = null;
+            e.currentTarget.innerHTML = "<span>Bắt đầu ngay</span>";
+            return;
+          }
+          e.currentTarget.innerHTML = "<span>Tạm dừng</span>";
+          timerInterval = setInterval(() => {
+            if(timeLeft > 0) {
+              timeLeft--;
+              updateClockDisplay();
+            } else {
+              clearInterval(timerInterval);
+              alert("🎉 Chúc mừng! Bạn đã hoàn thành 1 phiên tập trung!");
+              e.currentTarget.innerHTML = "<span>Bắt đầu ngay</span>";
+            }
+          }, 1000);
+        });
+      }
+
+      const resetTimerBtn = document.getElementById('reset-timer-btn');
+      if(resetTimerBtn) {
+        resetTimerBtn.addEventListener('click', () => {
+          clearInterval(timerInterval);
+          timerInterval = null;
+          const startBtn = document.getElementById('start-timer-btn');
+          if(startBtn) startBtn.innerHTML = "<span>Bắt đầu ngay</span>";
+          timeLeft = 25 * 60;
+          updateClockDisplay();
+        });
+      }
+
+      const noteArea = document.getElementById('note-text');
+      const noteStatus = document.getElementById('note-status');
+      const noteWordCount = document.getElementById('note-word-count');
+
+      if(noteArea) {
+        try { 
+          noteArea.value = localStorage.getItem('noma_demo_note') || ''; 
+          updateNoteStats(); 
+        } catch(e) {}
+        
+        noteArea.addEventListener('input', () => {
+          updateNoteStats();
+          try {
+            localStorage.setItem('noma_demo_note', noteArea.value);
+            if(noteStatus) {
+              noteStatus.textContent = "✓ Đã lưu tự động";
+              setTimeout(() => { noteStatus.textContent = ""; }, 2000);
+            }
+          } catch(e) {}
+        });
+      }
+
+      function updateNoteStats() {
+        if(!noteArea || !noteWordCount) return;
+        const text = noteArea.value.trim();
+        const words = text ? text.split(/\s+/).length : 0;
+        const chars = text.length;
+        noteWordCount.textContent = `${words} từ | ${chars} ký tự`;
+      }
+
+      function clearNote() {
+        if(!noteArea) return;
+        noteArea.value = '';
+        updateNoteStats();
+        try { localStorage.removeItem('noma_demo_note'); } catch(e) {}
+        showToast("Đã xóa ghi chú");
+      }
+
+      function updateMotto() {
+        const input = document.getElementById('custom-motto-input');
+        if(!input) return;
+        const val = input.value.trim();
+        if(!val) return;
+        const mottoTitle = document.getElementById('motto-title');
+        if(mottoTitle) mottoTitle.textContent = val;
+        input.value = '';
+        showToast("Đã cập nhật tiêu đề");
+      }
+
+      function selectPlan(planName) {
+        const planInput = document.getElementById('selected-plan-input');
+        if(planInput) planInput.value = planName;
+        showToast("Đã chọn gói: " + planName);
+      }
+
+      function showToast(msg) {
+        const t = document.getElementById('toast-msg');
+        if(t) {
+          t.textContent = msg;
+          t.classList.add('show');
+          setTimeout(() => t.classList.remove('show'), 2500);
+        }
+      }
+
+      function handleNetlifySubmit(e) {
+        e.preventDefault();
+        const form = e.target;
+        const feedback = document.getElementById('form-feedback');
+        const formData = new FormData(form);
+
+        fetch("/", {
+          method: "POST",
+          headers: { "Content-Type": "application/x-www-form-urlencoded" },
+          body: new URLSearchParams(formData).toString()
+        })
+        .then(() => {
+          if(feedback) feedback.textContent = "Đã ghi nhận thông tin đăng ký.";
+          showToast("Thành công!");
+          form.reset();
+        })
+        .catch(() => {
+          if(feedback) feedback.textContent = "Có lỗi xảy ra, vui lòng thử lại.";
+        });
+      }
+
+      function openLegal(type) {
+        const modal = document.getElementById('legal-modal');
+        const body = document.getElementById('legal-body');
+        if(type === 'privacy') {
+          body.innerHTML = `<h3>Quyền riêng tư</h3><p>Dữ liệu thử nghiệm và tùy chỉnh của bạn được lưu trữ hoàn toàn trên thiết bị cục bộ (localStorage) và không gửi về máy chủ.</p>`;
+        } else {
+          body.innerHTML = `<h3>Điều khoản</h3><p>Mọi thắc mắc liên hệ qua email cuongcongchua97@gmail.com hoặc SĐT 0589 595 169 (Nguyễn Văn Cường).</p>`;
+        }
+        if(modal) modal.classList.add('open');
+      }
+
+      function closeLegal() {
+        const modal = document.getElementById('legal-modal');
+        if(modal) modal.classList.remove('open');
+      }
+    </script>
+  </body>
+</html>
