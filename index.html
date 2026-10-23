@@ -399,20 +399,23 @@
       if(weekdayEl) weekdayEl.textContent = weekdays[now.getDay()];
       if(monthEl) monthEl.textContent = `Tháng ${now.getMonth() + 1}, ${now.getFullYear()}`;
 
-      const observerOptions = { root: null, rootMargin: '0px 0px -50px 0px', threshold: 0.15 };
-      const scrollObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('is-visible');
-          } else {
-            if (window.scrollY < entry.boundingClientRect.top + window.scrollY) {
+      const revealSections = document.querySelectorAll('.scroll-reveal');
+      if('IntersectionObserver' in window) {
+        document.documentElement.classList.add('has-scroll-reveal');
+        const observerOptions = { root: null, rootMargin: '0px 0px -50px 0px', threshold: 0.15 };
+        const scrollObserver = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('is-visible');
+            } else if (window.scrollY < entry.boundingClientRect.top + window.scrollY) {
               entry.target.classList.remove('is-visible');
             }
-          }
-        });
-      }, observerOptions);
-
-      document.querySelectorAll('.scroll-reveal').forEach(el => scrollObserver.observe(el));
+          });
+        }, observerOptions);
+        revealSections.forEach(el => scrollObserver.observe(el));
+      } else {
+        revealSections.forEach(el => el.classList.add('is-visible'));
+      }
 
       const toggleBtn = document.getElementById('theme-toggle-btn');
       if(toggleBtn) {
@@ -519,13 +522,7 @@
             }
           }
 
-          if(window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-            displayedPercentage = percentage;
-            text.textContent = `${percentage}%`;
-            progressAnimationFrame = null;
-          } else {
-            progressAnimationFrame = requestAnimationFrame(animatePercentage);
-          }
+          progressAnimationFrame = requestAnimationFrame(animatePercentage);
         }
       }
 
